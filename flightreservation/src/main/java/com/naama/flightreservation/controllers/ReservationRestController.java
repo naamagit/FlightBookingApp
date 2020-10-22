@@ -1,5 +1,7 @@
 package com.naama.flightreservation.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +18,13 @@ import com.naama.flightreservation.repos.ReservationRepository;
 public class ReservationRestController {
 	@Autowired
 	ReservationRepository reservationRepository;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(FlightController.class);
+
 
 	@RequestMapping("/reservations/{id}")
 	public Reservation findReservation(@PathVariable("id") Long id) {
+		LOGGER.info("Inside findReservation() " + id);
 		return reservationRepository.findById(id).get();
 	}
 
